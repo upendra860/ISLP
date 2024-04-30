@@ -71,3 +71,43 @@ Supervised learning problems will have a response variable to supervise our anal
 ## Regression Versus Classification Problems
 We tend to refer to problems with a quantitative response as regression problems, while those involving a qualitative response are often referred to as classification problems.
 Despite its name, logistic regression is a classification method. But since it estimates class probabilities, it can be thought of as a regression method as well.
+
+# Assessing Model Accuracy
+Model selection is most challenging part of the model buildng. We chose among all the studied methods based on cerain criteria such as model performance or accuracy. 
+
+## Measuring the Quality of Fit
+To measure how close the prediction are to the actuals on given data set on which the model is trained, we have sevaral metrics to measure. 
+
+MSE (Mean Squared Error) is mean of squares of differences of actuals and predictions. Think about MSE as variance. 
+
+MSE = ${\Sigma(y_i - f'(x_i))} \over {n}$
+
+This is called training/in-sample MSE. in general, we do not really care how well the method works on the training data. Rather, we are interested in the accuracy of the pre-dictions that we obtain when we apply our method to previously unseen test data. So test/OOS MSE is what we really care about.
+
+In most cases, traning MSE decreases with incease in model fexibility. However, test MSE decreases initially upto certain extent of flexibility but increaes after a thrshold is reached. When a given method yields a small training MSE but a large test MSE, we are said to be overfitting the data. This happens because our statistical learning procedure is working too hard to find patterns in the training data, and may be picking up some patterns that are just caused by random chance rather than by true properties of the unknown function f. When we overfit the training data, the test MSE will be very large because the supposed patterns that the method found in the training data simply don’t exist in the test data. Note that regardless of whether or not overfitting has occurred, we almost always expect the training MSE to be smaller than the test MSE because most statistical learning methods either directly or indirectly seek to minimize the training MSE.
+
+When test data is not available, we use cross-validation, which is a method for estimating the test MSE using the training data.
+
+## The Bias-Variance Trade-Off
+In order to minimize the expected test error, we need to select a statistical learning method that simultaneously achieves
+low variance and low bias. 
+
+Variance refers to the amount by which f' would change if we estimated it using a different training data set. In general, more flexible statistical methods have higher variance.
+
+bias refers to the error that is introduced by approximating a real-life problem, which may be extremely complicated, by a much simpler model. Generally, more flexible methods result in less bias.
+For example, linear regression assumes that there is a linear relationship between Y and X1,X2, . . . ,Xp. It is unlikely that any real-life problem truly has such a simple linear relationship, and so performing linear
+regression will undoubtedly result in some bias in the estimate of f.
+
+As a general rule, as we use more flexible methods, the variance will increase and the bias will decrease. The relative rate of change of these two quantities determines whether the test MSE increases or decreases. As we increase the flexibility of a class of methods, the bias tends to initially decrease faster than the variance increases. Consequently, the expected test MSE declines. However, at some point increasing flexibility has little impact on the bias but starts to significantly increase the variance. When this happens the test MSE increases.
+
+The relationship between bias, variance, and test set MSE is referred to as the bias-variance trade-off. 
+Good test set performance of a statistical learning method requires low variance as well as low squared bias. This is referred to as a trade-off because it is easy to obtain a method with extremely low bias but high variance (for instance, by drawing a curve that passes through every single training observation) or a method with very low variance but high
+bias (by fitting a horizontal line to the data). The challenge lies in finding a method for which both the variance and the squared bias are low.
+
+In a real-life situation in which f is unobserved, it is generally not possible to explicitly compute the test MSE, bias, or variance for a statistical learning method. Nevertheless, one should always keep the bias-variance trade-off in mind.
+
+## The Classification Setting
+many of the concepts that we have encountered, such as the bias-variance trade-off, transfer over to the classification setting with only some modifications due to the fact that yi is no longer quantitative.
+
+In classification problem, since the response variable is qualitative, we use 'error rate' to measure the model accuracy. 
+The error rate is defined as the ratio of total mis-classified observations to the total observations (Confusion matrix is one way to show these).
