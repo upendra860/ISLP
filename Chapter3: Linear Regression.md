@@ -93,7 +93,7 @@ and b1 were known exactly, any prediction of sales on the basis of TV advertisin
 
 If predictions are closure to actuals, then RSE is lesser, which means the model fits data well.
 
-## R^2 Statistic
+### R^2 Statistic
 The RSE provides an absolute measure of lack of fit of the model to the data. But since it is measured in the units of Y , it is not always clear what constitutes a good RSE. The R2 statistic provides an alternative measure of fit. It takes the form of a proportion—the proportion of variance explained—and so it always takes on a value between 0 and 1, and is independent of the scale of Y.
 
 R2 = (TSS − RSS) / TSS
